@@ -5,7 +5,7 @@ import Signup from './Signup'
 function App() {
   const [name, setName] = useState('')
   const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
+  const [errors, setError] = useState('')
   const [token, setToken] = useState(localStorage.getItem('token'))
   const [showSignup, setShowSignup] = useState(false)
 
@@ -31,8 +31,8 @@ function App() {
       }
       setToken(data.token)
       localStorage.setItem('token', data.token)
-    } catch (error) {
-      console.log(error)
+    } catch (err) {
+      console.log(err)
       setError('Something went wrong')
     }
   }
@@ -69,7 +69,7 @@ function App() {
         </div>
         <button type="submit">Log In</button>
       </form>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {errors && <p style={{ color: 'red' }}>{errors}</p>}
       <button onClick={() => setShowSignup(true)}>Need an account? Sign up</button>
     </div>
   )
