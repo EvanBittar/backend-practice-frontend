@@ -86,32 +86,72 @@ function UsersList({ token, onLogout }) {
         }
     }
 
-    if (error) return <p style={{ color: 'red' }}>{error}</p>
+    if (error) return <p className='text-red-600 p-4'>{error}</p>
 
     return (
-        <div>
-            <h2>Users</h2>
-            <button onClick={onLogout}>Log Out</button>
-            <ul>
-                {users.map(user => (
-                    <li key={user.id}>
-                        {editingId === user.id ? (
-                            <>
-                                <input value={editName} onChange={(e) => setEditName(e.target.value)} />
-                                <input type="number" value={editAge} onChange={(e) => setEditAge(e.target.value)} />
-                                <button onClick={() => handleUpdate(user.id)}>Save</button>
-                                <button onClick={cancelEditing}>Cancel</button>
-                            </>
-                        ) : (
-                            <>
-                                {user.name} — age {user.age}
-                                <button onClick={() => startEditing(user)}>Edit</button>
-                                <button onClick={() => handleDelete(user.id)}>Delete</button>
-                            </>
-                        )}
-                    </li>
-                ))}
-            </ul>
+        <div className="min-h-screen bg-gray-100 p-8">
+            <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-6">
+                <div className="flex justify-between items-center mb-6">
+                    <h2 className="text-2xl font-bold text-gray-800">Users</h2>
+                    <button
+                        onClick={onLogout}
+                        className="bg-gray-200 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-300 transition"
+                    >
+                        Log Out
+                    </button>
+                </div>
+                <ul className="space-y-3">
+                    {users.map(user => (
+                        <li key={user.id} className="flex items-center justify-between border border-gray-200 rounded-md p-3">
+                            {editingId === user.id ? (
+                                <div className="flex flex-1 gap-2 items-center">
+                                    <input
+                                        value={editName}
+                                        onChange={(e) => setEditName(e.target.value)}
+                                        className="border border-gray-300 rounded-md px-2 py-1 flex-1"
+                                    />
+                                    <input
+                                        type="number"
+                                        value={editAge}
+                                        onChange={(e) => setEditAge(e.target.value)}
+                                        className="border border-gray-300 rounded-md px-2 py-1 w-20"
+                                    />
+                                    <button
+                                        onClick={() => handleUpdate(user.id)}
+                                        className="bg-green-600 text-white px-3 py-1 rounded-md hover:bg-green-700 transition"
+                                    >
+                                        Save
+                                    </button>
+                                    <button
+                                        onClick={cancelEditing}
+                                        className="bg-gray-200 text-gray-700 px-3 py-1 rounded-md hover:bg-gray-300 transition"
+                                    >
+                                        Cancel
+                                    </button>
+                                </div>
+                            ) : (
+                                <>
+                                    <span className="text-gray-800">{user.name} — age {user.age}</span>
+                                    <div className="flex gap-2">
+                                        <button
+                                            onClick={() => startEditing(user)}
+                                            className="bg-blue-600 text-white px-3 py-1 rounded-md hover:bg-blue-700 transition"
+                                        >
+                                            Edit
+                                        </button>
+                                        <button
+                                            onClick={() => handleDelete(user.id)}
+                                            className="bg-red-600 text-white px-3 py-1 rounded-md hover:bg-red-700 transition"
+                                        >
+                                            Delete
+                                        </button>
+                                    </div>
+                                </>
+                            )}
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </div>
     )
 }
