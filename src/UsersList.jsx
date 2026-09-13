@@ -10,7 +10,7 @@ function UsersList({ token, onLogout }) {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch('http://localhost:3000/users', {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/users`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -34,7 +34,7 @@ function UsersList({ token, onLogout }) {
 
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3000/users/${id}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/users/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       })
@@ -62,7 +62,7 @@ function UsersList({ token, onLogout }) {
 
   const handleUpdate = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3000/users/${id}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/users/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
